@@ -1,11 +1,18 @@
 ---
- - ec2:
-    key_name: demo1
-    instance_type: t2.micro
-    image: ami-0e9b948ec1c64509
-    wait: yes
-    group: localhosts
-    count: 3
-    vpc_subnet_id: subnet-0683074a
-    assign_public_ip: yes
+- hosts: localhost
+  become: yes
+  tasks: 
+  - name: create ansible nodes
+    ec2:
+     key_name: demo1
+     instance_type: t2.micro
+     image: ami-0e486c094eb15a0e7
+     wait: yes
+     region: us-east-2
+     group: launch-wizard-12
+     instance_tags:
+      Name: ubuntunodes
+     count: 1
+     vpc_subnet_id: subnet-0683074a
+     assign_public_ip: yes
 
